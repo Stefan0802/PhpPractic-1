@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-   use HasFactory;
-   public $timestamps = false;
+    use HasFactory;
+    public $timestamps = false;
 }
