@@ -65,4 +65,33 @@ class Auth
         return $token;
     }
 
+    public function generateToken(int $userId): string
+    {
+        // Генерируем токен
+        $token = bin2hex(random_bytes(60)); // 60 байт → 120 символов hex
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 day'));
+
+        // Сохраняем в БД
+        Model\Token::create([
+            'user_id' => $userId,
+            'token' => $token,
+            'expires_at' => $expiresAt
+        ]);
+
+        return $token;
+    }
+
+    public function checkByToken(string $token): ?\App\Model\User
+    {
+        $tokenRecord = Model\Token::where('token', $token)
+            ->where('expires_at', '>', now())
+            ->first();
+
+        if ($tokenRecord) {
+            return $tokenRecord->user; // Предположим, что есть связь `user()` в модели `Token`
+        }
+
+        return null;
+    }
+
 }

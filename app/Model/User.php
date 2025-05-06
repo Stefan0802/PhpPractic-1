@@ -17,12 +17,18 @@ class User extends Model implements IdentityInterface
         'password'
     ];
 
+
     protected static function booted()
     {
         static::created(function ($user) {
             $user->password = md5($user->password);
             $user->save();
         });
+    }
+
+    public function tokens()
+    {
+        return $this->hasMany(Token::class, 'user_id');
     }
 
     //Выборка пользователя по первичному ключу
