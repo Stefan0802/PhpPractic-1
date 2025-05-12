@@ -115,6 +115,16 @@ class Api
 
          (new View())->toJSON(['phones' => $phones]);
     }
+
+    public function logout(): void
+    {
+        Auth::logout();
+
+        (new View())->toJSON([
+            'status' => 'success',
+            'message' => 'пользователь успешно вышел из системы'
+        ]);
+    }
 }
 
 
