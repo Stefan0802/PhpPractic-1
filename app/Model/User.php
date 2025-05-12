@@ -44,6 +44,12 @@ class User extends Model implements IdentityInterface
         return $this->id;
     }
 
+    public static function searchUser($name)
+    {
+        $user = self::where('login', $name)->first();
+        return $user ?? '';
+    }
+
     //Возврат аутентифицированного пользователя
     public function attemptIdentity(array $credentials)
     {
