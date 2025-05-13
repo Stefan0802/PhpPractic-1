@@ -44,4 +44,20 @@ class Request
         }
         throw new Error('Accessing a non-existent property');
     }
+
+    public function header(string $name, $default = null)
+    {
+        return $this->headers[$name] ?? $default;
+    }
+
+    public function getPath(): string
+    {
+        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    }
+
+    public function uri(): string
+    {
+        return $_SERVER['REQUEST_URI'] ?? '/';
+    }
+
 }

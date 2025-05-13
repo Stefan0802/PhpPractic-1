@@ -5,15 +5,15 @@ use Src\Route;
 Route::add('GET', '/', [Controller\Api::class, 'index']);
 Route::add('POST', '/echo', [Controller\Api::class, 'echo']);
 
-Route::add('POST', '/register', [Controller\Api::class, 'api_register']);
-Route::add('POST', '/login', [Controller\Api::class, 'api_login']);
-Route::add('GET', '/home', [Controller\Api::class, 'home'])->middleware('token');
-Route::add('GET', '/logout', [Controller\Api::class, 'logout'])->middleware('token');;
+Route::add('POST', '/register', [Controller\User::class, 'api_register']);
+Route::add('POST', '/login', [Controller\User::class, 'api_login']);
+Route::add('GET', '/home', [Controller\Api::class, 'home']);
+Route::add('GET', '/logout', [Controller\User::class, 'logout']);
+//->middleware('token')
+Route::add('GET', '/about', [Controller\Api::class, 'about']);
 
-Route::add('GET', '/about', [Controller\Api::class, 'about'])->middleware('token');
+Route::add('POST', '/createPhone', [Controller\Phone::class, 'create_number']);
 
-Route::add('POST', '/createPhone', [Controller\Api::class, 'create_number'])->middleware('token');
-
-Route::add('GET', '/phone', [Controller\Api::class, 'phone'])->middleware('token');
+Route::add('GET', '/phone', [Controller\Phone::class, 'phone']);
 
 
